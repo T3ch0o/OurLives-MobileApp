@@ -34,7 +34,19 @@ class AppBackground extends StatelessWidget {
                             width: width * 1.6,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.black
+                                color: secondCirleColor
+                          ),
+                      ),
+                    ),
+                    Positioned(
+                        right: -width * 0.2,
+                        top: -width / 12,
+                        child: Container(
+                            height: width / 2,
+                            width: width / 2,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: thirdCirleColor
                           ),
                       ),
                     )
