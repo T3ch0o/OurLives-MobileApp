@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:our_lives/common/app_background.dart';
+import 'package:our_lives/common/horizontal_tab_layout.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -7,7 +9,10 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
           children: <Widget>[
-              AppBackground()
+              AppBackground(),
+              Center(
+                  child: HorizontalTabLayout(),
+              )
           ],
       )
     );
