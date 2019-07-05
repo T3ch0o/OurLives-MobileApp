@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:our_lives/common/album_card.dart';
 import 'package:our_lives/common/tab_text.dart';
+import 'package:our_lives/models/album.dart';
 
 class HorizontalTabLayout extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout> {
                         left: 0,
                         bottom: 0,
                         top: 0,
+                        width: 80.0,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32.0),
                           child: Column(
@@ -32,14 +35,14 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout> {
                                         },
                                     ),
                                     TabText(
-                                        text: 'Albums',
+                                        text: '...',
                                         isSelected: selectedTabIndex == 1,
                                         onTabTap: () {
                                             onTabTap(1);
                                         }
                                     ),
                                     TabText(
-                                        text: 'Albums',
+                                        text: '...',
                                         isSelected: selectedTabIndex == 2,
                                         onTabTap: () {
                                             onTabTap(2);
@@ -48,6 +51,16 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout> {
                                 ],
                             ),
                         ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 60.0),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          AlbumCard(album: memeAlbum),
+                          AlbumCard(album: memeAlbum)
+                        ],
+                      ),
                     )
                 ]
             ),
