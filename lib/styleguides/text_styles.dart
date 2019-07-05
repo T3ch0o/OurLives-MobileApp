@@ -50,7 +50,7 @@ final TextStyle buttonStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
-final TextStyle forumNameTextStyle = TextStyle(
+final TextStyle albumNameTextStyle = TextStyle(
   color: Colors.white,
   fontSize: 22.0,
   fontWeight: FontWeight.w800,
