@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:our_lives/models/album.dart';
 
+import 'album_name_widget.dart';
+
 class AlbumCard extends StatelessWidget {
 
   final Album album;
@@ -19,12 +21,13 @@ class AlbumCard extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: Stack(
+          child: Stack(
             children: <Widget>[
               Image.asset(
                 album.imagePath,
                 fit: BoxFit.fitWidth
-              )
+              ),
+              AlbumNameWidget(album: album)
             ]
           ),
         )
