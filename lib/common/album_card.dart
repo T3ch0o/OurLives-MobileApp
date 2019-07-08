@@ -27,7 +27,11 @@ class AlbumCard extends StatelessWidget {
                 album.imagePath,
                 fit: BoxFit.fitWidth
               ),
-              AlbumNameWidget(album: album)
+              Positioned(
+                left: 0,
+                bottom: 90.0,
+                child: AlbumNameWidget(album: album)
+              )
             ]
           ),
         )
