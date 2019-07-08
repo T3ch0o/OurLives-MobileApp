@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:our_lives/models/album.dart';
 
+import 'album_details_widget.dart';
 import 'album_name_widget.dart';
 
 class AlbumCard extends StatelessWidget {
@@ -26,6 +27,12 @@ class AlbumCard extends StatelessWidget {
               Image.asset(
                 album.imagePath,
                 fit: BoxFit.fitWidth
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AlbumDetailsWidget(album: album)
               ),
               Positioned(
                 left: 0,
