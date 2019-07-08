@@ -1,6 +1,6 @@
 import 'package:flutter/painting.dart';
 
-class CustomShapeBorder extends ShapeBorder {
+class CustomTextShapeBorder extends ShapeBorder {
   final double distanceFromWall = 12;
   final double controlPointDistanceFromWall = 2;
 
