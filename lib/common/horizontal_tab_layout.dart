@@ -68,7 +68,7 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 60.0),
+          padding: const EdgeInsets.only(left: 80.0),
           child: FutureBuilder(
             future: playAnimation(),
             builder: (context, snapshot) {
