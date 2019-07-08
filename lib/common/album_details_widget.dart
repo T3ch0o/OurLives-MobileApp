@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:our_lives/clippers/album_details_custom_clipper.dart';
+import 'package:our_lives/common/label_value_widget.dart';
 import 'package:our_lives/models/album.dart';
 import 'package:our_lives/styleguides/text_styles.dart';
-
-import 'clippers/album_details_custom_clipper.dart';
 
 class AlbumDetailsWidget extends StatelessWidget {
 
@@ -49,9 +49,26 @@ class AlbumDetailsWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 40.0,
+              height: 30.0,
             ),
-
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                LabelValueWidget(
+                  value: '5',
+                  label: 'favourites',
+                  labelStyle: labelTextStyle,
+                  valueStyle: valueTextStyle
+                ),
+                LabelValueWidget(
+                  value: '20',
+                  label: 'subscribers',
+                  labelStyle: labelTextStyle,
+                  valueStyle: valueTextStyle
+                )
+              ]
+            )
           ]
         )
       )
