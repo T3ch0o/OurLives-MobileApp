@@ -12,17 +12,18 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
     with SingleTickerProviderStateMixin {
   int selectedTabIndex = 0;
   AnimationController _controller;
-  Animation<double> _animation;
+  Animation<Offset> _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1000));
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+        vsync: this, duration: const Duration(milliseconds: 500));
+    _animation = Tween<Offset>(begin: Offset(0, 0), end: Offset(-0.05, 0)).animate(_controller);
+    // _animation = Tween<Offset>(begin: 0.0, end: 1.0).animate(_controller);
   }
 
-  void playAnimation() {
+  Future<dynamic> playAnimation() async {
     _controller.reset();
     _controller.forward();
   }
@@ -60,16 +61,25 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
                     // isSelected: selectedTabIndex == 2,
                     // onTabTap: () {
                     //   onTabTap(2);
-                    // })
+                    // }
+                  )
               ],
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 60.0),
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: getList(selectedTabIndex),
+          child: FutureBuilder(
+            future: playAnimation(),
+            builder: (context, snapshot) {
+              return SlideTransition(
+                  position: _animation,
+                  child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: getList(selectedTabIndex),
+                ),
+              );
+            }
           ),
         )
       ]),
