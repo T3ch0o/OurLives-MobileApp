@@ -36,7 +36,7 @@ class AlbumDetailsWidget extends StatelessWidget {
                     width: 40.0,
                     child: Center(
                       child: Text(
-                        album.total.toString(),
+                        album.totalImages.toString(),
                         style: totalImagesStyle
                       ),
                     ),
@@ -50,7 +50,8 @@ class AlbumDetailsWidget extends StatelessWidget {
             ),
             SizedBox(
               height: 40.0,
-            )
+            ),
+
           ]
         )
       )
