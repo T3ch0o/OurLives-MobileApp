@@ -5,7 +5,7 @@ class AlbumDetailsCustomClipper extends CustomClipper<Path> {
   final double controlPointDistanceFromWall = 2;
 
   @override
-  getClip(Size size) {
+  Path getClip(Size size) {
     final double height = size.height;
     final double halfHeight = size.height * 0.5;
     final double width = size.width;
