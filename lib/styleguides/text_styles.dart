@@ -20,7 +20,7 @@ final TextStyle whiteLabelTextStyle = TextStyle(
   fontSize: 16.0,
   color: Colors.white,
 );
-final TextStyle rankStyle = TextStyle(
+final TextStyle totalImagesStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20.0,
   color: primaryColor,
