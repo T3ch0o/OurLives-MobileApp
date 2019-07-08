@@ -16,7 +16,7 @@ class TabText extends StatelessWidget {
 				onTap: onTabTap,
 				child: AnimatedDefaultTextStyle(
           style: isSelected ? selectedTabStyle : defaultTabStyle,
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 150),
           child: Text(
     	  			text
     	  		),
