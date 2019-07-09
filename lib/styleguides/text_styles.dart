@@ -36,17 +36,17 @@ final TextStyle defaultTabStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 final TextStyle headingStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 25.0,
   color: Colors.black,
   fontWeight: FontWeight.bold,
 );
 final TextStyle subHeadingStyle = TextStyle(
-  fontSize: 22.0,
+  fontSize: 18.0,
   color: Colors.blueGrey,
   fontWeight: FontWeight.bold,
 );
 final TextStyle buttonStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 25.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
