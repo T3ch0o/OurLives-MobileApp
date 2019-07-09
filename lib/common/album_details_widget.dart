@@ -42,7 +42,7 @@ class AlbumDetailsWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'new',
+                    'images',
                     style: labelTextStyle
                   )
                 ],
