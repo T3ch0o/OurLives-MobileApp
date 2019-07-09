@@ -4,7 +4,7 @@ class LabelValueWidget extends StatelessWidget {
   final String label, value;
   final TextStyle labelStyle, valueStyle;
 
-  LabelValueWidget({this.label, this.value, this.labelStyle, this.valueStyle})
+  LabelValueWidget({this.label, this.value, this.labelStyle, this.valueStyle});
 
   @override
   Widget build(BuildContext context) {
