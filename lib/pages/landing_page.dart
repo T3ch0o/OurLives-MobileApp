@@ -12,7 +12,11 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
           children: <Widget>[
-              AppBackground(),
+              AppBackground(
+                firstColor: firstCirleColor,
+                secondColor: secondCirleColor,
+                thirdColor: thirdCirleColor
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
