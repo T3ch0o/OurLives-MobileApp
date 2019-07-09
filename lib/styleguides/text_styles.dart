@@ -12,12 +12,12 @@ final TextStyle labelTextStyle = TextStyle(
 );
 final TextStyle whiteValueTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 18.0,
+  fontSize: 20.0,
   color: Colors.white
 );
 final TextStyle whiteLabelTextStyle = TextStyle(
   fontWeight: FontWeight.normal,
-  fontSize: 16.0,
+  fontSize: 20.0,
   color: Colors.white,
 );
 final TextStyle totalImagesStyle = TextStyle(
