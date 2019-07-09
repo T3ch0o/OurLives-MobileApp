@@ -35,16 +35,19 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   HeadingWidget(),
+                  SizedBox(
+                    height: 80.0,
+                  ),
                   HorizontalTabLayout(),
                   Spacer(),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
                       child: Text('New Album', style: buttonStyle),
                       decoration: BoxDecoration(
                         color: primaryColor,
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0))
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(40.0))
                       ),
                     ),
                   )
