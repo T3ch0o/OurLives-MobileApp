@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:our_lives/styleguides/colors.dart';
 
 class AppBackground extends StatelessWidget {
+  final Color firstColor, secondColor, thirdColor;
+
+  AppBackground({this.firstColor, this.secondColor, this.thirdColor});
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -22,7 +26,7 @@ class AppBackground extends StatelessWidget {
                             width: height,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: firstCirleColor
+                                color: firstColor
                           ),
                       ),
                     ),
@@ -34,7 +38,7 @@ class AppBackground extends StatelessWidget {
                             width: width * 1.6,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: secondCirleColor
+                                color: secondColor
                           ),
                       ),
                     ),
@@ -46,7 +50,7 @@ class AppBackground extends StatelessWidget {
                             width: width / 2,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: thirdCirleColor
+                                color: thirdColor
                           ),
                       ),
                     )
