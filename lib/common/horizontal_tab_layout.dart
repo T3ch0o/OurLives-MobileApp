@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:our_lives/api/firebase_service.dart';
 import 'package:our_lives/common/album_card.dart';
 import 'package:our_lives/common/tab_text.dart';
 import 'package:our_lives/models/album.dart';
 
 class HorizontalTabLayout extends StatefulWidget {
+  final FirebaseService firebaseSerivce;
+
+  HorizontalTabLayout({this.firebaseSerivce});
+
   @override
   _HorizontalTabLayoutState createState() => _HorizontalTabLayoutState();
 }
@@ -51,18 +57,19 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
                   },
                 ),
                 TabText(
-                    text: 'Favorite',
-                    isSelected: selectedTabIndex == 1,
-                    onTabTap: () {
-                      onTabTap(1);
-                    }),
+                  text: '...',
+                  // isSelected: selectedTabIndex == 1,
+                  // onTabTap: () {
+                  //   onTabTap(1);
+                  // }
+                ),
                 TabText(
-                    text: '...',
-                    // isSelected: selectedTabIndex == 2,
-                    // onTabTap: () {
-                    //   onTabTap(2);
-                    // }
-                  )
+                  text: '...',
+                  // isSelected: selectedTabIndex == 2,
+                  // onTabTap: () {
+                  //   onTabTap(2);
+                  // }
+                )
               ],
             ),
           ),
@@ -74,10 +81,19 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
             builder: (context, snapshot) {
               return SlideTransition(
                   position: _animation,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: getList(selectedTabIndex),
-                ),
+                  child: StreamBuilder(
+                    stream: widget.firebaseSerivce.albumsStream,
+                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> asyncSnapshot) {
+                      if (asyncSnapshot.hasError) {
+                        return Center(child: Text('No albums created'));
+                      }
+
+                      switch(asyncSnapshot.connectionState) {
+                        case ConnectionState.waiting: return Center(child: CircularProgressIndicator());
+                        default: return _buildList(context, asyncSnapshot.data.documents);
+                      }
+                    }
+                  ),
               );
             }
           ),
@@ -86,19 +102,14 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
     );
   }
 
-  List<Widget> getList(index) {
-    return [
-      [
-        AlbumCard(album: memeAlbum),
-        AlbumCard(album: memeAlbum),
-        AlbumCard(album: memeAlbum),
-        AlbumCard(album: memeAlbum)
-      ],
-      [
-        AlbumCard(album: memeAlbum),
-        AlbumCard(album: memeAlbum)
-      ],
-    ][index];
+  Widget _buildList(context, List<DocumentSnapshot> snapshots) {
+    return ListView.builder(
+      itemCount: snapshots.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return AlbumCard(album: Album.fromSnapshot(snapshots[index]));
+      }
+    );
   }
 
   void onTabTap(int index) {
