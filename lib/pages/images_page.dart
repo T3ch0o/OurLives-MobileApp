@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:our_lives/common/album_details_items_widget.dart';
 import 'package:our_lives/common/app_background.dart';
+import 'package:our_lives/common/card_scroll_widget.dart';
 import 'package:our_lives/common/images_background.dart';
 import 'package:our_lives/models/album.dart';
 import 'package:our_lives/styleguides/colors.dart';
@@ -18,18 +19,16 @@ class ImagesPage extends StatefulWidget {
 
 class _ImagesPage extends State<ImagesPage> {
   final Album album;
-  double currenPage;
+  double currentPage;
 
   _ImagesPage({this.album});
 
   @override
   Widget build(BuildContext context) {
-    currenPage = album.totalImages.toDouble();
-   
     PageController controller = PageController(initialPage: album.totalImages);
     controller.addListener(() {
       setState(() {
-        currenPage = controller.page;
+        currentPage = controller.page;
       });
     });
 
@@ -41,6 +40,7 @@ class _ImagesPage extends State<ImagesPage> {
             secondColor: secondCirleImagesPageColor,
             thirdColor: thirdCirleImagesPageColor
           ),
+          ImagesBackground(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -70,15 +70,19 @@ class _ImagesPage extends State<ImagesPage> {
                 ),
               ),
               SizedBox(
-                height: 30.0,
+                height: 60.0,
               ),
-              ImagesBackground(),
               Stack(
                 children: <Widget>[
+                  CardScrollWidget(currentPage, album),
                   Positioned.fill(
                     child: PageView.builder(
                       itemCount: album.totalImages,
-                      controller: controller
+                      controller: controller,
+                      reverse: true,
+                      itemBuilder: (context, index) {
+                        return Container();
+                      },
                     ),
                   )
                 ]
