@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_lives/api/firebase_service.dart';
 
 import 'package:our_lives/common/app_background.dart';
 import 'package:our_lives/common/heading_widget.dart';
@@ -7,6 +8,10 @@ import 'package:our_lives/styleguides/colors.dart';
 import 'package:our_lives/styleguides/text_styles.dart';
 
 class LandingPage extends StatelessWidget {
+  final FirebaseService firebaseService;
+
+  LandingPage({this.firebaseService});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +47,7 @@ class LandingPage extends StatelessWidget {
                   SizedBox(
                     height: 80.0,
                   ),
-                  HorizontalTabLayout(),
+                  HorizontalTabLayout(firebaseSerivce: firebaseService),
                   Spacer(),
                   Align(
                     alignment: Alignment.bottomRight,
