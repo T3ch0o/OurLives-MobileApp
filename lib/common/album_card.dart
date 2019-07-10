@@ -42,8 +42,11 @@ class AlbumCard extends StatelessWidget {
                         left: 0,
                         bottom: 90.0,
                         child: AlbumNameWidget(album: album))
-                  ]),
-                ))),
+                  ]
+                ),
+              )
+            )
+          ),
       ),
     );
   }
