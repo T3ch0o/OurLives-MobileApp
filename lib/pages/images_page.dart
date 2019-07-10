@@ -6,13 +6,33 @@ import 'package:our_lives/models/album.dart';
 import 'package:our_lives/styleguides/colors.dart';
 import 'package:our_lives/styleguides/text_styles.dart';
 
-class ImagesPage extends StatelessWidget {
+class ImagesPage extends StatefulWidget {
   final Album album;
 
   ImagesPage({this.album});
 
   @override
+  _ImagesPage createState() => _ImagesPage(album: album);
+}
+
+
+class _ImagesPage extends State<ImagesPage> {
+  final Album album;
+  double currenPage;
+
+  _ImagesPage({this.album});
+
+  @override
   Widget build(BuildContext context) {
+    currenPage = album.totalImages.toDouble();
+   
+    PageController controller = PageController(initialPage: album.totalImages);
+    controller.addListener(() {
+      setState(() {
+        currenPage = controller.page;
+      });
+    });
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -52,7 +72,17 @@ class ImagesPage extends StatelessWidget {
               SizedBox(
                 height: 30.0,
               ),
-              ImagesBackground()
+              ImagesBackground(),
+              Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: PageView.builder(
+                      itemCount: album.totalImages,
+                      controller: controller
+                    ),
+                  )
+                ]
+              )
             ],
           )
         ],
