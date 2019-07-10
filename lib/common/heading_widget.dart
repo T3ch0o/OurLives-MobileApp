@@ -9,7 +9,7 @@ class HeadingWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Albums', style: headingStyle),
+          Text('Our Lives', style: headingStyle),
           Text('Everything you want in one place!', style: subHeadingStyle)
         ],
       ),
