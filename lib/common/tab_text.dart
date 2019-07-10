@@ -4,7 +4,7 @@ import 'package:our_lives/styleguides/text_styles.dart';
 class TabText extends StatelessWidget {
 	final String text;
 	final bool isSelected;
-	Function onTabTap;
+	final Function onTabTap;
 
 	TabText({this.text, this.isSelected = false, this.onTabTap});
 
