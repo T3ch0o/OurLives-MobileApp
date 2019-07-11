@@ -4,6 +4,7 @@ import 'package:our_lives/api/firebase_service.dart';
 import 'package:our_lives/common/album_card.dart';
 import 'package:our_lives/common/tab_text.dart';
 import 'package:our_lives/models/album.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 
 class HorizontalTabLayout extends StatefulWidget {
   final FirebaseService firebaseSerivce;
@@ -82,7 +83,7 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
               return SlideTransition(
                   position: _animation,
                   child: StreamBuilder(
-                    stream: widget.firebaseSerivce.albumsStream,
+                    stream:  widget.firebaseSerivce.getAlbums(),
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> asyncSnapshot) {
                       if (asyncSnapshot.hasError) {
                         return Center(child: Text('No albums created'));
@@ -103,11 +104,11 @@ class _HorizontalTabLayoutState extends State<HorizontalTabLayout>
   }
 
   Widget _buildList(context, List<DocumentSnapshot> snapshots) {
-    return ListView.builder(
+    return PreloadPageView.builder(
       itemCount: snapshots.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return AlbumCard(album: Album.fromSnapshot(snapshots[index]));
+        return AlbumCard(album: Album.fromSnapshot(snapshots[index]), firebaseSerivce: widget.firebaseSerivce, albumId: snapshots[index].documentID);
       }
     );
   }
