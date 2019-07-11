@@ -1,13 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:our_lives/models/album.dart';
+import 'package:our_lives/models/image.dart';
+
 class FirebaseService {
   CollectionReference albums = Firestore.instance.collection('albums');
-
-  StreamController<QuerySnapshot> albumsController = StreamController<QuerySnapshot>();
-
-  Stream<QuerySnapshot> get albumsStream => albumsController.stream;
-  StreamSink<QuerySnapshot> get albumsSink => albumsController.sink;
 
   Stream<QuerySnapshot> getAlbums() {
     return albums.snapshots();
@@ -17,13 +18,18 @@ class FirebaseService {
     // albums.add()
   }
 
-  FirebaseService() {
-    getAlbums().listen((albums) {
-      albumsSink.add(albums);
-    });
+  Future uploadImage(Album album, String albumId, File image, String fileName) async {
+    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('${album.title.toLowerCase()}/${fileName}');
+    StorageUploadTask task = firebaseStorageRef.putFile(image);
+
+    var downloadUrlSync = await (await task.onComplete).ref.getDownloadURL();
+
+    String downloadUrl = downloadUrlSync.toString();
+    
+    _updateAlbumImage(downloadUrl, albumId);
   }
 
-  dispose() {
-    albumsController.close();
+  _updateAlbumImage(String downloadUrl, String albumId) {
+    albums.document(albumId).updateData({'images': FieldValue.arrayUnion([{ 'imagePath': downloadUrl, 'likes': 0 }])});
   }
 }
