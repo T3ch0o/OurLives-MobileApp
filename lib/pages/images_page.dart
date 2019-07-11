@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:our_lives/api/firebase_service.dart';
 import 'package:our_lives/common/album_details_items_widget.dart';
 import 'package:our_lives/common/app_background.dart';
 import 'package:our_lives/common/card_scroll_widget.dart';
@@ -6,26 +10,48 @@ import 'package:our_lives/common/images_background.dart';
 import 'package:our_lives/models/album.dart';
 import 'package:our_lives/styleguides/colors.dart';
 import 'package:our_lives/styleguides/text_styles.dart';
+import 'package:preload_page_view/preload_page_view.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 class ImagesPage extends StatefulWidget {
   final Album album;
+  final FirebaseService firebaseService;
+  final String albumId;
 
-  ImagesPage({this.album});
+  ImagesPage({this.album, this.firebaseService, this.albumId});
 
   @override
-  _ImagesPage createState() => _ImagesPage(album: album);
+  _ImagesPage createState() => _ImagesPage(album: album, firebaseService: firebaseService);
 }
 
 
 class _ImagesPage extends State<ImagesPage> {
+  final FirebaseService firebaseService;
+
   final Album album;
   double currentPage;
 
-  _ImagesPage({this.album});
+  File image;
+  String fileName;
+
+  _ImagesPage({this.album, this.firebaseService});
+
+  Future getImage() async {
+    File selectedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    File compressedFile = await FlutterNativeImage.compressImage(selectedImage.path,
+    quality: 80, percentage: 30);
+
+    setState(() {
+      image = compressedFile;
+      String imageExtension = selectedImage.path.split('.').last;
+      fileName = '${album.title.toLowerCase()}_${album.images.length + 2}.${imageExtension}';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController(initialPage: album.totalImages);
+    PreloadPageController controller = PreloadPageController(initialPage: album.images.length);
     controller.addListener(() {
       setState(() {
         currentPage = controller.page;
@@ -47,10 +73,14 @@ class _ImagesPage extends State<ImagesPage> {
               SizedBox(
                 height: 60.0,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {
+                    Navigator.pop(context);
+                  },
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Icon(
@@ -58,6 +88,28 @@ class _ImagesPage extends State<ImagesPage> {
                     color: Colors.white,
                   ),
                 ),
+              ),
+              InkWell(
+                onTap: () {
+                  getImage();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Material(
+                      elevation: 10.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Icon(Icons.add_photo_alternate, color: primaryColor),
+                      ),
+                      color: Colors.white,
+                      shape: CircleBorder(),
+                    ),
+                  ),
+                ),
+              ),
+                ]
               ),
               SizedBox(
                 height: 30.0,
@@ -72,12 +124,12 @@ class _ImagesPage extends State<ImagesPage> {
               SizedBox(
                 height: 60.0,
               ),
-              Stack(
+              image == null ? Stack(
                 children: <Widget>[
                   CardScrollWidget(currentPage, album),
                   Positioned.fill(
-                    child: PageView.builder(
-                      itemCount: album.totalImages,
+                    child: PreloadPageView.builder(
+                      itemCount: album.images.length,
                       controller: controller,
                       reverse: true,
                       itemBuilder: (context, index) {
@@ -86,11 +138,36 @@ class _ImagesPage extends State<ImagesPage> {
                     ),
                   )
                 ]
-              )
+              ) : uploadImageView()
             ],
           )
         ],
       )
+    );
+  }
+
+  Widget uploadImageView() {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Image.file(image, height: 300.0, width: 300.0, fit: BoxFit.cover,),
+          SizedBox(
+            height: 20.0,
+          ),
+          RaisedButton(
+            elevation: 7.0,
+            child: Text('Upload'),
+            color: primaryColor,
+            textColor: Colors.white,
+            onPressed: () {
+              firebaseService.uploadImage(album, widget.albumId, image, fileName);
+              setState(() {
+                image = null;
+              });
+            },
+          )
+        ],
+      ),
     );
   }
 }
