@@ -14,12 +14,12 @@ class AlbumDetailsItemsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         LabelValueWidget(
-            value: '5',
+            value: '0',
             label: 'favourites',
             labelStyle: labelStyle,
             valueStyle: valueStyle),
         LabelValueWidget(
-            value: '20',
+            value: '0',
             label: 'subscribers',
             labelStyle: labelStyle,
             valueStyle: valueStyle)
