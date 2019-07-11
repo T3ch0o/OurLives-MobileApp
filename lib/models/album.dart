@@ -18,7 +18,7 @@ class Album {
     title = map['title'],
     imagePath = map['imagePath'],
     images = (map['images'] as List).map((image) => Image.fromMap(image)).toList(),
-    totalImages = map['totalImages'];
+    totalImages = (map['images'] as List).length;
 }
 
 final memeAlbum = Album(
