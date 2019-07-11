@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:our_lives/models/album.dart';
 
@@ -17,7 +18,7 @@ class CardScrollWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: widgetApectRatio,
-      child: LayoutBuilder(
+      child: currentPage == null ? Container() : LayoutBuilder(
         builder: (context, contraints) {
           double width = contraints.maxWidth;
           double height = contraints.maxHeight;
@@ -51,7 +52,7 @@ class CardScrollWidget extends StatelessWidget {
                   child: Stack(
                     fit: StackFit.expand,
                     children: <Widget>[
-                      Image.asset(album.images[i].imagePath, fit: BoxFit.cover)
+                      Image(image: CachedNetworkImageProvider(album.images[i].imagePath), fit: BoxFit.cover)
                     ]
                   ),
                 ),
