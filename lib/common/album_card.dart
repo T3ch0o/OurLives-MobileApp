@@ -30,7 +30,7 @@ class AlbumCard extends StatelessWidget {
             width: 80.0,
             child: Card(
                 margin: const EdgeInsets.symmetric(
-                    horizontal: 50.0, vertical: 20.0),
+                    horizontal: 40.0, vertical: 20.0),
                 elevation: 9.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
