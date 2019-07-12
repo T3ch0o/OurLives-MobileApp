@@ -7,11 +7,13 @@ class ImagesBackground extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraint) {
         double width = constraint.maxWidth;
+        double deviceHeight = MediaQuery.of(context).size.height;
+        double marginHeight = deviceHeight.toInt() < 700 ? 180.0 : 200.0;
 
         Widget container = Stack(
           children: <Widget>[
             Positioned(
-              top: 190.0,
+              top: marginHeight,
               child: Container(
                 decoration: BoxDecoration(
                   color: backgroundColor,
