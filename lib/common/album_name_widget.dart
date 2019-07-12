@@ -17,7 +17,7 @@ class AlbumNameWidget extends StatelessWidget {
       elevation: 20.0,
       shape: CustomTextShapeBorder(),
       child: Padding(
-        padding: const EdgeInsets.only(top: 18.0, left: 20.0, right: 16.0, bottom: 5.0),
+        padding: const EdgeInsets.only(top: 25.0, left: 20.0, right: 16.0, bottom: 2.0),
         child: Text(
           album.title,
           style: albumNameTextStyle,
