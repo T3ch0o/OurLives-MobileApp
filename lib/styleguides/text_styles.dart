@@ -52,6 +52,6 @@ final TextStyle buttonStyle = TextStyle(
 );
 final TextStyle albumNameTextStyle = TextStyle(
   color: Colors.white,
-  fontSize: 22.0,
+  fontSize: 18.0,
   fontWeight: FontWeight.w800,
 );
