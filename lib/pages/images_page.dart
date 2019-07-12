@@ -111,8 +111,15 @@ class _ImagesPage extends State<ImagesPage> {
               ),
                 ]
               ),
-              SizedBox(
-                height: 30.0,
+              LayoutBuilder(
+                builder: (context, contraints) {
+                  double deviceHeight = MediaQuery.of(context).size.height;
+                  double marginHeight = deviceHeight.toInt() < 700 ? 10.0 : 30.0;
+
+                  return SizedBox(
+                    height: marginHeight,
+                  );
+                }
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 150.0),
@@ -138,7 +145,7 @@ class _ImagesPage extends State<ImagesPage> {
                     ),
                   )
                 ]
-              ) : uploadImageView()
+              ) : uploadImageWiget()
             ],
           )
         ],
@@ -146,11 +153,14 @@ class _ImagesPage extends State<ImagesPage> {
     );
   }
 
-  Widget uploadImageView() {
+  Widget uploadImageWiget() {
     return Center(
       child: Column(
         children: <Widget>[
-          Image.file(image, height: 300.0, width: 300.0, fit: BoxFit.cover,),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(60.0),
+            child: Image.file(image, height: 350.0, width: 300.0, fit: BoxFit.cover)
+          ),
           SizedBox(
             height: 20.0,
           ),
@@ -161,6 +171,7 @@ class _ImagesPage extends State<ImagesPage> {
             textColor: Colors.white,
             onPressed: () {
               firebaseService.uploadImage(album, widget.albumId, image, fileName);
+              Navigator.pop(context);
               setState(() {
                 image = null;
               });
