@@ -44,8 +44,17 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   HeadingWidget(),
-                  SizedBox(
-                    height: 80.0,
+                  LayoutBuilder(
+                    builder: (context, contraints) {
+                      double deviceHeight = MediaQuery.of(context).size.height;
+                      print(deviceHeight);
+                      double marginHeight = deviceHeight.toInt() < 700 ? 40.0 : 80.0;
+                      print(marginHeight);
+
+                      return SizedBox(
+                        height: marginHeight,
+                      );
+                    }
                   ),
                   HorizontalTabLayout(firebaseSerivce: firebaseService),
                   Spacer(),
