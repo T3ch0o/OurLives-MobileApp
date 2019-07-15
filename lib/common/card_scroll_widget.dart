@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:our_lives/models/album.dart';
 
 class CardScrollWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class CardScrollWidget extends StatelessWidget {
   final Album album;
   static final double cardAspectRatio = 12.0 / 16.0;
   final double widgetApectRatio = cardAspectRatio * 1.2; 
-  final double padding = 20.0;
+  final double padding = ScreenUtil.instance.setWidth(120.0);
   final double verticalInset = 20.0;
 
   CardScrollWidget(this.currentPage, this.album);
@@ -38,7 +39,7 @@ class CardScrollWidget extends StatelessWidget {
             double delta = i - currentPage;
             bool isOnRight = delta > 0;
 
-            double start = padding - 40 + max(primaryCardLeft - horizontalInset * -delta * (isOnRight ? 15 : 1), 0);
+            double start = padding - ScreenUtil.instance.setHeight(50.0) + max(primaryCardLeft - horizontalInset * -delta * (isOnRight ? 15 : 1), 0);
 
             Widget cardItem = Positioned.directional(
               top: padding + verticalInset * max(-delta, 0),
