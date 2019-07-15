@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:our_lives/api/firebase_service.dart';
 import 'package:our_lives/common/album_details_items_widget.dart';
 import 'package:our_lives/common/app_background.dart';
@@ -112,7 +113,7 @@ class _ImagesPage extends State<ImagesPage> {
                 ]
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 45,
+                height: 20.0,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 150.0),
@@ -122,7 +123,7 @@ class _ImagesPage extends State<ImagesPage> {
                 ),
               ),
               SizedBox(
-                height: 60.0,
+                height: ScreenUtil.instance.setHeight(85.0),
               ),
               image == null ? Stack(
                 children: <Widget>[
