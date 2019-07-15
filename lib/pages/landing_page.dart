@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:our_lives/api/firebase_service.dart';
 
 import 'package:our_lives/common/app_background.dart';
@@ -14,6 +15,8 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+
     return Scaffold(
       body: Stack(
           children: <Widget>[
@@ -45,7 +48,7 @@ class LandingPage extends StatelessWidget {
                   ),
                   HeadingWidget(),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 20,
+                    height: ScreenUtil.instance.setHeight(100.0),
                   ),
                   HorizontalTabLayout(firebaseSerivce: firebaseService),
                   Spacer(),
