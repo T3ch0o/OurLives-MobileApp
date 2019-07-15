@@ -111,15 +111,8 @@ class _ImagesPage extends State<ImagesPage> {
               ),
                 ]
               ),
-              LayoutBuilder(
-                builder: (context, contraints) {
-                  double deviceHeight = MediaQuery.of(context).size.height;
-                  double marginHeight = deviceHeight.toInt() < 700 ? 10.0 : 30.0;
-
-                  return SizedBox(
-                    height: marginHeight,
-                  );
-                }
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 45,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 150.0),
